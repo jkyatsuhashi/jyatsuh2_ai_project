@@ -46,4 +46,4 @@ def read_csv():
     model_data.loc[:, season_stats] = model_data.loc[:, season_stats] * 16
 
     model_data = pd.get_dummies(model_data)  # convert it to form for sklearn
-    return model_data
+    return model_data, nfl_data
