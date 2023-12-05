@@ -8,8 +8,8 @@ from most_important import print_most_important
 
 def main():
     model_data, nfl_data = read_csv()
-    RF_MODEL, average_error = random_forest(model_data)
-    most_important = Predictor(RF_MODEL, model_data)
+    rf, average_error = random_forest(model_data)
+    most_important = Predictor(rf, model_data)
     if average_error > 8:
         print(f"Average Error High: {average_error}")
     while 1:
@@ -23,7 +23,7 @@ def main():
                     home_team = input("Enter Home Team: ")
                     away_team = input("Enter Away Team: ")
                     _, winner = Score_Prediction(
-                        home_team, away_team, model_data, nfl_data, RF_MODEL
+                        home_team, away_team, model_data, nfl_data, rf
                     )
                     print(f"{winner} is projected to win the game.")
                 except Exception as ex:
@@ -33,7 +33,7 @@ def main():
                     home_team = input("Enter Home Team: ")
                     away_team = input("Enter Away Team: ")
                     score, _ = Score_Prediction(
-                        home_team, away_team, model_data, nfl_data, RF_MODEL
+                        home_team, away_team, model_data, nfl_data, rf
                     )
                     print(f"{home_team}: {round(score[0], 1)} ")
                     print(f"{away_team}: {round(score[1], 1)} ")
