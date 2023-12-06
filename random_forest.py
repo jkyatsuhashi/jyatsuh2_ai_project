@@ -25,10 +25,12 @@ def random_forest(data):
         category=UserWarning,
     )
 
-    rf = RandomForestRegressor(n_estimators=2000, random_state=42)
+    # Create the random forest regressor and train it on train and test on test
+    rf = RandomForestRegressor(n_estimators=2500, random_state=42)
     rf.fit(X_train, y_train)
     y_pred = rf.predict(X_test)
-    # Evaluat
+
+    # Evaluate results of test
     metrics = {
         "mean_absolute_error": mean_absolute_error(y_test, y_pred),
         "r_squared": r2_score(y_test, y_pred),

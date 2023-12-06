@@ -30,8 +30,6 @@ def read_csv(file_path="nfl_game_data.csv"):
             "LOG_Prediction",
         ]
     ]
-
     # Convert categorical variables to numerical representation
     model_data = pd.get_dummies(model_data)
-
     return model_data, nfl_data
