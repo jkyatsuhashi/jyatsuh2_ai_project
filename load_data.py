@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-import numpy as np
 import pandas as pd
 
 
-def read_csv():
-    nfl_data = pd.read_csv("nfl_game_data.csv")
-    nfl_data.head(5)
+def read_csv(file_path="nfl_game_data.csv"):
+    """
+    Read NFL game data from a CSV file, preprocess it for modeling, and return the prepared data.
+    """
+    # Read the CSV file
+    nfl_data = pd.read_csv(file_path)
 
-    # Remove Tm, Week, Opponent Score, Result
+    # Just get the important categories
     model_data = nfl_data[
         [
             "FULL_TEAM_NAME",
@@ -29,24 +31,7 @@ def read_csv():
         ]
     ]
 
-    # Change to season statistics
-    season_stats = [
-        "O_1stD",
-        "O_Tot_Yd",
-        "O_P_Yd",
-        "O_R_Yd",
-        "O_TO",
-        "D_1stD",
-        "D_Tot_Yd",
-        "D_P_Yd",
-        "D_R_Yd",
-        "D_TO",
-    ]
-
-    model_data.loc[:, season_stats] = (
-        model_data.loc[:, season_stats] * 16
-    )  # set for 16 game season
-    # convert categorical variables to zeros and ones so they will work in the sklearn model
+    # Convert categorical variables to numerical representation
     model_data = pd.get_dummies(model_data)
-    # The model_data will be ready for random forest, nfl_data preserves much of original just cleans a bit
+
     return model_data, nfl_data
